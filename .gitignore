@@ -1,0 +1,8 @@
+# Ignore node modules and credentials
+
+node_modules
+config.json
+
+# Ignore databases
+
+database.db
