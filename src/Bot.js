@@ -25,6 +25,12 @@ class Bot extends Discord.Client {
         }
     }
 
+    /**
+     * 
+     * @param {Integer}             points the number of reputation points to give to the user
+     * @param {Discord.GuildMember} gifter the person that is giving the reputation points
+     * @param {Discord.GuildMember} giftee the person that is receiving the reputation points
+     */
     giveRep(points, gifter, giftee) {
         return new Promise(async (resolve, reject) => {
             let user = await this.findUser(giftee, gifter.guild);
@@ -57,6 +63,11 @@ class Bot extends Discord.Client {
         });
     }
 
+    /**
+     * 
+     * @param {Discord.GuildMember} member the admin giving permissions
+     * @param {Discord.Role}        role   the role that will have access to admin privs of this bot
+     */
     giveAdmin(member, role) {
         return new Promise(async (resolve, reject) => {
             let r = member.guild.roles.get(role.replace(/<@&(\d+)>/,"$1"));
@@ -81,6 +92,11 @@ class Bot extends Discord.Client {
         });
     }
 
+    /**
+     * 
+     * @param {Discord.GuildMember} member the admin giving the participation point
+     * @param {String}              u the user receiving the participation point
+     */
     givePoint(member, u) {
         return new Promise(async (resolve, reject) => {
             let user = await this.findUser(u, member.guild);
@@ -106,6 +122,11 @@ class Bot extends Discord.Client {
         });
     }
 
+    /**
+     * 
+     * @param {Discord.GuildMember} member the admin giving the win point
+     * @param {String}              u the user receiving the win point
+     */
     giveWin(member, u) {
         return new Promise(async (resolve, reject) => {
             let user = await this.findUser(u, member.guild);
@@ -131,6 +152,10 @@ class Bot extends Discord.Client {
         });
     }
 
+    /**
+     * 
+     * @param {Discord.Guild} guild guild the user would like to get the leaderboard of
+     */
     async getBoard(guild) {
         let leaderboard = this.db.prepare("SELECT * FROM leaderboard WHERE guildId = ? ORDER BY wins+competition DESC LIMIT 10").all(guild.id);
         let message = "😐 I have no recordings for this server.";
@@ -146,10 +171,13 @@ class Bot extends Discord.Client {
             message = `:cityscape: | Guild Score Leaderboards for ${guild.name}\n\n\`\`\`cs\n📋 Rank | Name\n\n${message}\n\`\`\``;
             return message;
         }
-            
-
     }
 
+    /**
+     * 
+     * @param {String}          input the id, tag, or username of the user you would like to ifnd
+     * @param {Discord.Guild}   guild the guild you would like to check they are in
+     */
     async findUser(input, guild) {
         return new Promise(async (resolve, reject) => {
             let user = await this.fetchUser(input, true).catch(err => console.log(`${input} cannot be fetched. Continuing rest of the function now`)); // Try and fetch a user by id and cache it

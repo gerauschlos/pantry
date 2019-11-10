@@ -1,5 +1,6 @@
 const Bot = require('./src/Bot.js');
 const config = require('./config.json');
+const { RichEmbed } = require('discord.js')
 const client = new Bot();
 const { readdirSync } = require('fs');
 let presences = ["📚 Writing Pantry","😍 Falling in love with fiction", "📗 Drowned in poetry"];
@@ -85,6 +86,16 @@ client.on("message", async msg => {
             await msg.channel.send(await client.getBoard(msg.guild));
             break;
         default:
+            let channel = await msg.author.createDM();
+            let embed = new RichEmbed()
+                .setAuthor(client.user.username, client.user.avatarURL)
+                .setDescription("Looks like you need some help, so here you go!")
+                .addField("Example", ">give-win [username #]\n>point [username #]\n>admin [role #]\n>rep [point #] [username #]\t\n>lb",true)
+                .addField("Alias","giveW/give-win\nadmin/priv\nrep/r\nlb/leaderboard",true)
+                .setFooter(client.user.username+" | "+msg.author.username, client.user.avatarURL)
+                .setColor(0x4dcc82)
+                .setTimestamp();
+            channel.send(embed);
 
     }
 });
