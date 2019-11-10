@@ -16,8 +16,8 @@ client.on("ready", () => {
         client.user.setAvatar(`./images/${avatars[Math.floor(Math.random()*avatars.length)]}`);
     },3600000);
 
-    //client.user.setActivity(presences[Math.floor(Math.random()*presences.length)]);
-    //client.user.setAvatar(`./images/${avatars[Math.floor(Math.random()*avatars.length)]}`);
+    client.user.setActivity(presences[Math.floor(Math.random()*presences.length)]);
+    client.user.setAvatar(`./images/${avatars[Math.floor(Math.random()*avatars.length)]}`);
 
     console.log(client.user.username+" is now online.");
     console.log(`ID: ${client.user.id}`);
