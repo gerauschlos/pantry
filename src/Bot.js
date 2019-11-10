@@ -173,6 +173,22 @@ class Bot extends Discord.Client {
         }
     }
 
+    async getRank(member) {
+        const rank = this.leaderboard.find(v => v.userId == member.id && v.guildId == member.guild.id);
+        if (!rank)
+            return "😐 I have no recordings for this user."
+        const embed = new Discord.RichEmbed()
+            .setAuthor(this.user.username, this.user.avatarURL)
+            .setDescription("Here are the recordings! 😆")
+            .addField("Wins",rank.wins,true)
+            .addField("Participations",rank.competition,true)
+            .addField("Reputation",rank.rep,true)
+            .setFooter(this.user.username+" | "+member.user.username, this.user.avatarURL)
+            .setColor(0x4dcc82)
+            .setTimestamp();
+        return embed;
+    }
+
     /**
      * 
      * @param {String}          input the id, tag, or username of the user you would like to ifnd

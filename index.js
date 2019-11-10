@@ -85,6 +85,10 @@ client.on("message", async msg => {
         case "leaderboard":
             await msg.channel.send(await client.getBoard(msg.guild));
             break;
+        case "me":
+        case "rank":
+            await msg.channel.send(await client.getRank(msg.mentions.members.first() || msg.member));
+            break;
         default:
             let channel = await msg.author.createDM();
             let embed = new RichEmbed()
