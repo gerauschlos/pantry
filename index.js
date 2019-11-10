@@ -94,8 +94,8 @@ client.on("message", async msg => {
             let embed = new RichEmbed()
                 .setAuthor(client.user.username, client.user.avatarURL)
                 .setDescription("Looks like you need some help, so here you go!")
-                .addField("Example", ">give-win [username #]\n>point [username #]\n>admin [role #]\n>rep [point #] [username #]\t\n>lb",true)
-                .addField("Alias","giveW/give-win\nadmin/priv\nrep/r\nlb/leaderboard",true)
+                .addField("Example", ">give-win [username #]\n>point [username #]\n>admin [role #]\n>rep [point #] [username #]\t\n>lb\n>me [mention #]",true)
+                .addField("Alias","giveW/give-win\nadmin/priv\nrep/r\nlb/leaderboard\nme/rank",true)
                 .setFooter(client.user.username+" | "+msg.author.username, client.user.avatarURL)
                 .setColor(0x4dcc82)
                 .setTimestamp();
